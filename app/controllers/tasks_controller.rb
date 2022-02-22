@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
 
-  before_action :find_task, only: [:view, :edit]
+  before_action :find_task, only: [:view, :edit, :update, :destroy]
 
   def index
     @tasks = Task.all
@@ -19,6 +19,16 @@ class TasksController < ApplicationController
   end
 
   def edit; end
+
+  def update
+    @task.update(task_params)
+    redirect_to task_path(@task)
+  end
+
+  def destroy
+    @task.destroy
+    redirect_to tasks_path
+  end
 
   private
 
